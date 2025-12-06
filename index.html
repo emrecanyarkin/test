@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>💖 Aşk Testi 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #ff99c8, #ffb3d1, #ffcce1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 20px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(255, 0, 120, 0.25);
+            text-align: center;
+            border: 2px solid #ff8fb8;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 16px;
+            color: #ff2d75;
+        }
+
+        .emoji {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .field {
+            text-align: left;
+            margin-bottom: 14px;
+        }
+
+        label {
+            font-size: 15px;
+            color: #ff2d75;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            margin-top: 4px;
+            padding: 10px;
+            border-radius: 12px;
+            border: 2px solid #ffb3d9;
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #ff2d75;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 12px;
+            border: none;
+            color: white;
+            background: #ff2d75;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 20px rgba(255, 45, 117, 0.3);
+        }
+
+        button:hover {
+            background: #e02265;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .result {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 12px;
+            background: #ffe6f2;
+            border: 2px solid #ff8fc4;
+            white-space: pre-line;
+            font-size: 15px;
+            color: #c2185b;
+            font-weight: 600;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="emoji">💕</div>
+    <h1>💖 Aşk Testi 💖</h1>
+
+    <div class="field">
+        <label for="name">Adın nedir? 😍</label>
+        <input id="name" type="text" placeholder="ismini yaz bakalım...">
+    </div>
+
+    <div class="field">
+        <label for="midterm">Bana ne kadar aşıksın? (0–100) 💘</label>
+        <input id="midterm" type="number" placeholder="ör: 85">
+    </div>
+
+    <div class="field">
+        <label for="final">Beni ne kadar seviyorsun? (0–100) 🥰</label>
+        <input id="final" type="number" placeholder="ör: 90">
+    </div>
+
+    <button type="button" onclick="calculateLove()">💗 Hesapla 💗</button>
+
+    <div id="result" class="result">Sonuç burada görünecek 💞</div>
+</div>
+
+<script>
+    function calculateLove() {
+        const nameInput = document.getElementById("name");
+        const midInput = document.getElementById("midterm");
+        const finalInput = document.getElementById("final");
+        const resultDiv = document.getElementById("result");
+
+        const name = nameInput.value.trim();
+        const midStr = midInput.value.trim();
+        const finStr = finalInput.value.trim();
+
+        if (!name || !midStr || !finStr) {
+            alert("Lütfen tüm alanları doldur tatlım 💕");
+            resultDiv.textContent = "Lütfen tüm alanları doldur 💕";
+            return;
+        }
+
+        const mid = Number(midStr);
+        const fin = Number(finStr);
+
+        if (Number.isNaN(mid) || Number.isNaN(fin)) {
+            alert("Sayı girmelisin aşkım 😘");
+            resultDiv.textContent = "Sayı girmelisin 😘";
+            return;
+        }
+
+        if (mid < 0 || mid > 100 || fin < 0 || fin > 100) {
+            alert("0 ile 100 arasında bir değer yaz canım 💗");
+            resultDiv.textContent = "0 ile 100 arasında değer gir 💗";
+            return;
+        }
+
+        const general = fin * 0.4 + mid * 0.6;
+
+        let letter;
+        if (general >= 90)      letter = "💞 coookkk aşıksın, hayatının aşkını bulmuşsun! 💞";
+        else if (general >= 80) letter = "💖 aşıksın ama biraz kafan karışık 😌";
+        else if (general >= 70) letter = "💕 aşk olup olmadığını bilmiyorsun ama çok seviyorsun 💕";
+        else if (general >= 60) letter = "🙂 seviyorsun ama büyük aşk değil";
+        else if (general >= 50) letter = "😕 sevgin baya azalmış";
+        else                    letter = "💔 Sevgi de yok aşk da yok gibi...";
+
+        const message =
+            "💗 Adın: " + name +
+            "\n💗 Aşk Puanı: " + general.toFixed(2) +
+            "\n💗 Yorum: " + letter;
+
+        alert(message);
+        resultDiv.textContent = message;
+    }
+</script>
+
+</body>
+</html>
